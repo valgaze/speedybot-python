@@ -1,43 +1,9 @@
-# [🐍 Speedybot-python](https://pypi.org/project/speedybot)
-
-For the impatient, just go here: **[quickstart.md](./quickstart.md)**
-
-```md
-╔═╗ ╔═╗ ╔═╗ ╔═╗ ╔╦╗ ╦ ╦ ╔╗  ╔═╗ ╔╦╗ 
-╚═╗ ╠═╝ ║╣  ║╣   ║║ ╚╦╝ ╠╩╗ ║ ║  ║  
-╚═╝ ╩   ╚═╝ ╚═╝ ═╩╝  ╩  ╚═╝ ╚═╝  ╩
-```
-
-## What is SpeedyBot?
-
-SpeedyBot is a library makes it simple to build bots that are useful. It's user-friendly and lightweight conversation design tooling that **anybody** can use.
-
-SpeedyBot makes it effortless to build powerful and user-valuable conversation agents.
-
-Keep your eyes here for updates: https://speedybot.js.org
-
-## SpeedyCards
-
-SpeedyBot abstracts over a lot of API details for you, but perhaps its most immediately useful feature is that it makes creating visually complex + rich Adpative Cards speedy and easy.
-
-It's all the power of adaptive cards with none of the hassle or wrangling-- and you even get type'ing assistance
-
-![speedycard](https://raw.githubusercontent.com/valgaze/speedybot-python/main/assets/speedycard.gif)
-
-## Getting Started
-
-```
-pip install speedybot
-```
-
-## Quickstart
-
 ```python
 from speedybot import SpeedyBot
 
 ## Setup/import your bot
 ## Get a bot token here: https://developer.webex.com/my-apps/new/bot
-bot = SpeedyBot("__REPLACE__ME__")
+bot = SpeedyBot("__REPLACE__ME__"))
 
 ## Send Messages
 messsage = bot.send_to("valgaze@cisco.com", "here is **my message**")
@@ -81,18 +47,4 @@ sub_card = bot.card() \
 
 card.add_subcard(sub_card)
 bot.send_to('valgaze@cisco.com', card)
-
-```
-
-## Tests
-
-```
-python3 -m unittest tests/test.py
-```
-
-## Publishing
-
-```
-poetry build
-poetry publish
 ```
