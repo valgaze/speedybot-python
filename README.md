@@ -10,11 +10,10 @@ For the impatient, just go here: **[quickstart.md](./quickstart.md)**
 
 ## What is SpeedyBot?
 
-SpeedyBot is a library makes it simple to build bots that are useful. It's user-friendly and lightweight conversation design tooling that **anybody** can use.
-
-SpeedyBot makes it effortless to build powerful and user-valuable conversation agents.
+SpeedyBot is a library that makes it speedy and easy to build high-quality, user-valuable bots with rich interaction + conversation design. 
 
 Keep your eyes here for updates: https://speedybot.js.org
+
 
 ## SpeedyCards
 
