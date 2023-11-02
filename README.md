@@ -84,6 +84,9 @@ bot.send_to('valgaze@cisco.com', card)
 
 ```
 
+![card_demo](https://github.com/valgaze/speedybot-python/assets/1396559/3162ff42-537c-4f09-9f37-e2d361270c62)
+
+
 ## Tests
 
 ```
