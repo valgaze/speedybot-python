@@ -3,9 +3,9 @@
 For the impatient, just go here: **[quickstart.md](./quickstart.md)**
 
 ```md
-╔═╗ ╔═╗ ╔═╗ ╔═╗ ╔╦╗ ╦ ╦ ╔╗  ╔═╗ ╔╦╗ 
-╚═╗ ╠═╝ ║╣  ║╣   ║║ ╚╦╝ ╠╩╗ ║ ║  ║  
-╚═╝ ╩   ╚═╝ ╚═╝ ═╩╝  ╩  ╚═╝ ╚═╝  ╩
+╔═╗ ╔═╗ ╔═╗ ╔═╗ ╔╦╗ ╦ ╦ ╔╗ ╔═╗ ╔╦╗
+╚═╗ ╠═╝ ║╣ ║╣ ║║ ╚╦╝ ╠╩╗ ║ ║ ║  
+╚═╝ ╩ ╚═╝ ╚═╝ ═╩╝ ╩ ╚═╝ ╚═╝ ╩
 ```
 
 ## What is SpeedyBot?
@@ -26,7 +26,7 @@ It's all the power of adaptive cards with none of the hassle or wrangling-- and 
 ## Getting Started
 
 ```
-pip install speedybot
+pip install -U speedybot
 ```
 
 ## Quickstart
@@ -98,3 +98,11 @@ python3 -m unittest tests/test.py
 poetry build
 poetry publish
 ```
+
+## Visual Studio Code issue
+
+If you can't get auto-complete on visual studio you may need to select a Python interpeter
+
+Select ⇧⌘P and search for `Python: Select Interpreter` and pick the interpeter that matches the version with your project (`python --version`), **[🔗 more details here](https://code.visualstudio.com/docs/python/environments)**
+
+![speedycard](./assets/vsc_interpreter.gif)

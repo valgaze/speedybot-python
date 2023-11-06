@@ -1,5 +1,6 @@
 import copy
 
+
 class SpeedyCard:
     def __init__(self):
         self.json = {
@@ -15,7 +16,7 @@ class SpeedyCard:
             "chips": [],
             "data": {},
             "submitLabel": "Submit",
-            "backgroundImage": ""
+            "backgroundImage": "",
         }
 
         self.id = {}
@@ -44,62 +45,63 @@ class SpeedyCard:
         """
         self._stash["subTitle"] = subTitle
         return self
-    
-    def add_image(self, url, size="ExtraLarge"):
-        """
-        Args:
-            url (str): add a url to a publically addressable image url
-        """
-        if url:
-            self.json["body"].append({
-                "horizontalAlignment": "Center",
-                "size": size,
-                "type": "Image",
-                "url": url,
-            })
 
-    def add_subcard(self, card: 'SpeedyCard', label="Open"):
-        """
-        Args:
-            card (SpeedyCard): adds a subcard, must be a SpeedyCard
-        """
-        payload =   {
-            "type": "Action.ShowCard",
-            "title": label,
-            "card": card.build()
-        }
-        self.add_action(payload)
-        return self
-
-    def add_text(self, text:str, horizontalAlignment=None, size=None, color=None):
+    def add_image(self, url, horizontalAlignment="Center", size="ExtraLarge"):
         """
         Arguments are case-sensitive
         Args:
             horizontalAlignment (str): Horizontal alignment ("Left", "Center", "Right").
             size (str): Size option ("Small", "Default", "Medium", "Large", "ExtraLarge").
-            color (str): ("Default", "Dark", "Light", "Accent", "Good", "Warning", "Attention").            
+        """
+        if url:
+            self.json["body"].append(
+                {
+                    "horizontalAlignment": horizontalAlignment,
+                    "size": size,
+                    "type": "Image",
+                    "url": url,
+                }
+            )
+        return self
+
+    def add_subcard(self, card: "SpeedyCard", label="Open"):
+        """
+        Args:
+            card (SpeedyCard): adds a subcard, must be a SpeedyCard
+        """
+        payload = {"type": "Action.ShowCard", "title": label, "card": card.build()}
+        self.add_action(payload)
+        return self
+
+    def add_text(self, text: str, horizontalAlignment=None, size=None, color=None):
+        """
+        Arguments are case-sensitive
+        Args:
+            horizontalAlignment (str): Horizontal alignment ("Left", "Center", "Right").
+            size (str): Size option ("Small", "Default", "Medium", "Large", "ExtraLarge").
+            color (str): ("Default", "Dark", "Light", "Accent", "Good", "Warning", "Attention").
         """
 
-        self.json["body"].append({
-            "type": "TextBlock",
-            "text": text,
-            "wrap": True,
-            "size": size,
-            "horizontalAlignment": horizontalAlignment,
-            "color": color
-        }) 
+        self.json["body"].append(
+            {
+                "type": "TextBlock",
+                "text": text,
+                "wrap": True,
+                "size": size,
+                "horizontalAlignment": horizontalAlignment,
+                "color": color,
+            }
+        )
         return self
 
     def add_table(self, input, separator=False):
-        if not isinstance(input, list) or not all(isinstance(item, list) for item in input):
+        if not isinstance(input, list) or not all(
+            isinstance(item, list) for item in input
+        ):
             raise ValueError("Input should be a list of lists")
 
         facts = [{"title": item[0], "value": item[1]} for item in input]
-        result = {
-            "type": "FactSet",
-            "separator": separator,
-            "facts": facts
-        }
+        result = {"type": "FactSet", "separator": separator, "facts": facts}
         self.json["body"].append(result)
         return self
 
@@ -117,7 +119,7 @@ class SpeedyCard:
             "wrap": True,
             "size": size,
             "horizontalAlignment": align,
-            **({"color": color} if color is not None else {})
+            **({"color": color} if color is not None else {}),
         }
         return text_block
 
@@ -125,24 +127,39 @@ class SpeedyCard:
         self._stash["backgroundImage"] = url
         return self
 
-    def addLink(self, url: str, label: str = None):
+    def add_link(self, url: str, label: str = None):
         if label is None:
             label = url
         self.add_text(f"**[{label}]({url})**")
         return self
 
+        self.json["body"].append(
+            {
+                type: "Image",
+                "size": size,
+                "horizontalAlignment": horizontalAlignment,
+                url: url,
+            }
+        )
+        return self
+
     def build(self):
-        result_json = copy.deepcopy(self.json) 
+        result_json = copy.deepcopy(self.json)
         if self._stash["subTitle"]:
-            result_json["body"].insert(0, self.buildTextPayload(self._stash["subTitle"], {}))
+            result_json["body"].insert(
+                0, self.buildTextPayload(self._stash["subTitle"], {})
+            )
 
         if self._stash["title"]:
             result_json["body"].insert(
                 0,
-                self.buildTextPayload(self._stash["title"], {
-                    "weight": "Bolder",
-                    "size": "ExtraLarge",
-                })
+                self.buildTextPayload(
+                    self._stash["title"],
+                    {
+                        "weight": "Bolder",
+                        "size": "ExtraLarge",
+                    },
+                ),
             )
 
         if self._stash["backgroundImage"]:
@@ -152,11 +169,9 @@ class SpeedyCard:
         #     payload = {"type": "Action.Submit", "title": self._stash["submitLabel"]}
 
         return result_json
-    
+
     # Stay tuned, if you need something now, see https://speedybot.js.org
     def add_action(self, action):
         if "actions" not in self.json:
             self.json["actions"] = []
         self.json["actions"].append(action)
-
-
