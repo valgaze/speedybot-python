@@ -1,9 +1,13 @@
+```sh
+pip install speedybot
+```
+
 ```python
 from speedybot import SpeedyBot
 
 ## Setup/import your bot
 ## Get a bot token here: https://developer.webex.com/my-apps/new/bot
-bot = SpeedyBot("__REPLACE__ME__"))
+bot = SpeedyBot("__REPLACE__ME__")
 
 ## Send Messages
 messsage = bot.send_to("valgaze@cisco.com", "here is **my message**")

@@ -1,19 +1,18 @@
 # [🐍 Speedybot-python](https://pypi.org/project/speedybot)
 
-For the impatient, just go here: **[quickstart.md](./quickstart.md)**
+For the impatient, just go here: **[quickstart.md](https://github.com/valgaze/speedybot-python/blob/deploy/quickstart.md)**
 
 ```md
-╔═╗ ╔═╗ ╔═╗ ╔═╗ ╔╦╗ ╦ ╦ ╔╗ ╔═╗ ╔╦╗
-╚═╗ ╠═╝ ║╣ ║╣ ║║ ╚╦╝ ╠╩╗ ║ ║ ║  
-╚═╝ ╩ ╚═╝ ╚═╝ ═╩╝ ╩ ╚═╝ ╚═╝ ╩
+╔═╗ ╔═╗ ╔═╗ ╔═╗ ╔╦╗ ╦ ╦ ╔╗  ╔═╗ ╔╦╗ 
+╚═╗ ╠═╝ ║╣  ║╣   ║║ ╚╦╝ ╠╩╗ ║ ║  ║  
+╚═╝ ╩   ╚═╝ ╚═╝ ═╩╝  ╩  ╚═╝ ╚═╝  ╩
 ```
 
 ## What is SpeedyBot?
 
-SpeedyBot is a library that makes it speedy and easy to build high-quality, user-valuable bots with rich interaction + conversation design. 
+SpeedyBot is a library that makes it speedy and easy to build high-quality, user-valuable bots with rich interaction + conversation design.
 
 Keep your eyes here for updates: https://speedybot.js.org
-
 
 ## SpeedyCards
 
@@ -69,7 +68,7 @@ card = bot.card() \
         ['First Aid Kit', '1'],
     ]) \
     .add_text("With these supplies, we were well-prepared to face the challenges that lay ahead") \
-    .addLink('https://en.wikipedia.org/wiki/Ernest_Shackleton', 'Explore Earnest Shackleton Expedition') \
+    .add_link('https://en.wikipedia.org/wiki/Ernest_Shackleton', 'Explore Earnest Shackleton Expedition') \
 
 # Embed a card within the card
 sub_card = bot.card() \
@@ -83,8 +82,7 @@ bot.send_to('valgaze@cisco.com', card)
 
 ```
 
-![card_demo](https://github.com/valgaze/speedybot-python/assets/1396559/3162ff42-537c-4f09-9f37-e2d361270c62)
-
+![card_demo](https://raw.githubusercontent.com/valgaze/speedybot-python/deploy/assets/shackleton_sample.gif)
 
 ## Tests
 
@@ -105,4 +103,4 @@ If you can't get auto-complete on visual studio you may need to select a Python 
 
 Select ⇧⌘P and search for `Python: Select Interpreter` and pick the interpeter that matches the version with your project (`python --version`), **[🔗 more details here](https://code.visualstudio.com/docs/python/environments)**
 
-![speedycard](./assets/vsc_interpreter.gif)
+![speedycard](https://raw.githubusercontent.com/valgaze/speedybot-python/deploy/assets/vsc_interpreter.gif)
