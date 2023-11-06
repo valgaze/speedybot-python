@@ -1,7 +1,8 @@
 import requests
 import json
-from speedycard import SpeedyCard
+from .SpeedyCard import SpeedyCard
 from typing import NamedTuple
+
 
 class MessageResponse(NamedTuple):
     id: str
@@ -17,22 +18,22 @@ class MessageResponse(NamedTuple):
 
 
 class SpeedyBot:
-    def __init__(self, token:str, make_request=requests.request):
+    def __init__(self, token: str, make_request=requests.request):
         self.token = token
         self.middlewares = []
         self.top_middleware = None
         self.reject_middleware = None
         self.make_request = make_request
         self.API = {
-            'messages': 'https://webexapis.com/v1/messages',
-            'attachments': 'https://webexapis.com/v1/attachment/actions',
-            'user': {
-                'self': 'https://webexapis.com/v1/people/me',
-                'get_person_details': 'https://webexapis.com/v1/people',
+            "messages": "https://webexapis.com/v1/messages",
+            "attachments": "https://webexapis.com/v1/attachment/actions",
+            "user": {
+                "self": "https://webexapis.com/v1/people/me",
+                "get_person_details": "https://webexapis.com/v1/people",
             },
-            'rooms': 'https://developer.webex.com/docs/api/v1/rooms/list-rooms',
-            'room_details': 'https://webexapis.com/v1/rooms',
-            'webhooks': 'https://webexapis.com/v1/webhooks',
+            "rooms": "https://developer.webex.com/docs/api/v1/rooms/list-rooms",
+            "room_details": "https://webexapis.com/v1/rooms",
+            "webhooks": "https://webexapis.com/v1/webhooks",
         }
 
     def set_token(self, token):
@@ -40,25 +41,32 @@ class SpeedyBot:
 
     def card(self):
         return SpeedyCard()
-    
-    def send_card_to(self, email_or_room_id: str, card: SpeedyCard, fallback='Your client does not support adaptive cards') -> MessageResponse:
+
+    def send_card_to(
+        self,
+        email_or_room_id: str,
+        card: SpeedyCard,
+        fallback="Your client does not support adaptive cards",
+    ) -> MessageResponse:
         headers = {
-            'Authorization': f'Bearer {self.token}',
-            'Content-Type': 'application/json'
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json",
         }
 
         payload = {
-            'toPersonEmail': email_or_room_id if '@' in email_or_room_id else None,
-            'roomId': email_or_room_id if '@' not in email_or_room_id else None,
-            'markdown': fallback,
-            'attachments': [
+            "toPersonEmail": email_or_room_id if "@" in email_or_room_id else None,
+            "roomId": email_or_room_id if "@" not in email_or_room_id else None,
+            "markdown": fallback,
+            "attachments": [
                 {
-                    'contentType': "application/vnd.microsoft.card.adaptive",
-                    'content': card.build()
+                    "contentType": "application/vnd.microsoft.card.adaptive",
+                    "content": card.build(),
                 }
-            ]
+            ],
         }
-        response = self.make_request('POST', self.API['messages'], headers=headers, data=json.dumps(payload))
+        response = self.make_request(
+            "POST", self.API["messages"], headers=headers, data=json.dumps(payload)
+        )
         return response.json()
 
     def send_to(self, email_or_room_id, message) -> MessageResponse:
@@ -73,17 +81,16 @@ class SpeedyBot:
             return self.send_card_to(email_or_room_id, message)
 
         headers = {
-            'Authorization': f'Bearer {self.token}',
-            'Content-Type': 'application/json'
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json",
         }
-        payload = {
-            'toPersonEmail': email_or_room_id,
-            'markdown': message
-        }
-        response = self.make_request('POST', self.API['messages'], headers=headers, data=json.dumps(payload))
+        payload = {"toPersonEmail": email_or_room_id, "markdown": message}
+        response = self.make_request(
+            "POST", self.API["messages"], headers=headers, data=json.dumps(payload)
+        )
         return response.json()
 
-    def reply(self, roomId, messageId, message:str) -> MessageResponse:
+    def reply(self, roomId, messageId, message: str) -> MessageResponse:
         """
         Reply to a message in a chat room.
 
@@ -93,16 +100,18 @@ class SpeedyBot:
         :return: The result of the reply operation as a string.
         """
         headers = {
-            'Authorization': f'Bearer {self.token}',
-            'Content-Type': 'application/json'
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json",
         }
         payload = {
-            'parentId': messageId,
-            'roomId': roomId,
-            'text': message,
-            'markdown': message
+            "parentId": messageId,
+            "roomId": roomId,
+            "text": message,
+            "markdown": message,
         }
-        response = self.make_request('POST', self.API['messages'], headers=headers, data=json.dumps(payload))
+        response = self.make_request(
+            "POST", self.API["messages"], headers=headers, data=json.dumps(payload)
+        )
         return response.json()
 
     ## will unlock this later
